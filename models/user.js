@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
     },
     username:{
         type: Sequelize.STRING,
-        allowNull: false
+        
     },
     email:{
         type: Sequelize.STRING,
@@ -21,8 +21,7 @@ const User = sequelize.define('user', {
     },
     password: {
         type: Sequelize.STRING,
-        unique: true,
-        allowNull:false
+        
     }
 });
 

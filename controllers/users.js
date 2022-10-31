@@ -1,44 +1,74 @@
 const User = require('../models/user');
 
 
-exports.signedUsers = async (req,res,next)=>{
-  console.log('getting users');
-  try{
-      
-    const signedUser =  await User.findAll()
-    res.status(201).json({data: 'registred users'});
-   }
-   catch(error) {
-     console.log(error);
-     res.status(500).json({error:error});
-   }
+
+
+
+exports.signup = async(req ,res,next)=>{
+
+    try {
+        const {username, email, password} = req.body ;
+
+        if(!username || !email || !password){
+            return res.status(400).json({message:'add all fields'})
+        }
+
+        const user = await User.findAll({where:{email}});
+        if(user.length>0){
+            return res.status(207).json({message:'user already exist'})
+        }
+        await User.create({ username , email ,password})
+        return res.status(201).json({message:'successfully created new user'})
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
 
 }
 
+
+
+/*
 exports.signup = async (req,res,next)=>{
   console.log("hey into signup");
 
   try
   {
-    const username = req.body.username;
-    //console.log(username);
-    const email = req.body.email
-    const password = req.body.password;
+   /* User.findByPk(req.body.email).then(userEmail=>{
+      if(userEmail){
+        const email = req.body.email
+        
+        const data = {
+          email: email
+        }
+        res.status(207).json({newUserDetail: data})
+      }*/
+      /*
+     const findingEmail = await User.findByPk(req.body.email)
+     if(findingEmail !== null){
+        res.status(207).json({newUserDetail: 'Already Exists'})
+     }
+     if(findingEmail ==null)    
+      {
+        const username = req.body.username;
+        const email = req.body.email
+        const password = req.body.password;
 
-    if(!password){
-      throw new Error('please enter password');
-    }
+        if(!password){
+          throw new Error('please enter password');
+        }
 
-    const data = await User.create({
+        const signedUserData =  User.create({
 
-       username : username,
-       email : email,
-       password : password
+          username : username,
+          email : email,
+          password : password
 
-    })
+        })
 
-    res.status(201).json({newUserDetail: 'sucessfully signedup'});
+        res.status(201).json({newUserDetail: 'signup success'});
 
+     }
   }
 
   catch(error){
@@ -48,7 +78,7 @@ exports.signup = async (req,res,next)=>{
   }
 
 
-}
+}*/
 
 
 exports.getUsers = async (req,res,next)=>{

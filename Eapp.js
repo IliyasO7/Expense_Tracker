@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 
-app.use(userRoutes);
+app.use('/user',userRoutes);
 
 app.use(expenseRoutes);
 
