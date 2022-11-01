@@ -26,6 +26,33 @@ exports.signup = async(req ,res,next)=>{
 
 }
 
+exports.login = async(req,res)=>{
+
+  try{
+    const {email,password} = req.body;
+
+    const user = await User.findAll({where:{email,password}})
+   /// console.log(user);
+   // if(user.length==0){
+    //  console.log('yes');
+   // }
+
+
+    if(user.length>0){
+      res.status(201).json({message: 'login Success'})
+    }
+   else{
+    res.status(207).json({message: 'Invalid credentials '});
+   }
+
+    
+  }
+  catch(error){
+    res.status(500).json(error);
+  }
+
+}
+
 
 
 /*
