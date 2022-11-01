@@ -3,11 +3,15 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 
 
+
 const express = require('express'); //importing express module
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database'); //pool that allows use to use connection to db
+
+const User = require('./models/user');
+const Expense = require('./models/expense');
 
 
 const cors = require('cors');
@@ -45,10 +49,17 @@ app.use('/user',userRoutes);
 app.use(expenseRoutes);
 
 
+User.hasMany(Expense);
+Expense.belongsTo(User, { constraints : true, onDelete: 'CASCADE'})
+
+
+
 app.use(errorController.get404);
 
 
-sequelize.sync({force: true}).then(result =>{
+
+
+sequelize.sync().then(result =>{
     console.log('Server started at 5000');
     app.listen(5000); 
 }).catch(err=>{

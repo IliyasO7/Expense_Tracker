@@ -2,6 +2,8 @@ const User = require('../models/user');
 
 const bcrypt = require('bcrypt');
 
+const jwt = require('jsonwebtoken');
+
 
 
 
@@ -78,7 +80,7 @@ exports.login = async(req,res)=>{
         if(!match){
            return res.status(207).json({message: 'password incorrect'})
         }
-        return res.status(200).json({message: 'login success'})
+        return res.status(200).json({message: 'login success',token: generateToken(user[0].id) })
     })
     }
    else{
@@ -92,6 +94,10 @@ exports.login = async(req,res)=>{
     res.status(500).json(error);
   }
 
+}
+
+function generateToken(id){
+  return jwt.sign({userId:id}, 'whereistoken');
 }
 
 

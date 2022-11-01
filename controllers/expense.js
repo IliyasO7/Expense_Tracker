@@ -1,10 +1,14 @@
 const Expense = require('../models/expense');
 
 exports.getExpenses = async (req,res,next)=>{
+    const {eamount,edescription,category}= req.body;
    try
    {
-        const data = await Expense.findAll();
-        res.status(201).json(data);
+        let data = await  req.user.getExpenses()
+        res.status(200).json({data});
+
+        
+        
    }
    catch(error){
     console.log(error);
@@ -15,17 +19,31 @@ exports.getExpenses = async (req,res,next)=>{
 
 
 exports.addExpenses = async (req,res,next)=>{
+    const {eamount,edescription,category}= req.body;
+   
     try{
-        const eamount = req.body.eamount;
-        const edescription = req.body.edescription;
-        const category = req.body.category;
 
-        const data = await Expense.create({
+        if(!eamount || !edescription || !category){
+            return res.status(400).json({message: 'no fields can be empty'})
+        }
+        const data = await req.user.createExpense({
+            eamount,
+            edescription,
+            category
+        })
+        //magic funcs of seq for associations
+        res.status(201).json({newExpenseDetail: data})
+
+       // const eamount = req.body.eamount;
+       // const edescription = req.body.edescription;
+       // const category = req.body.category;
+
+       /* const data = await Expense.create({
             eamount: eamount,
             edescription: edescription,
             category: category,
         })
-        res.status(201).json({newExpenseDetail: data});
+        res.status(201).json({newExpenseDetail: data});*/
     }
     catch(error){
         console.log(error);
@@ -41,8 +59,13 @@ exports.deleteExpenses = async (req,res,next)=>{
         {
             res.status(400).json({error:'id missing'});
         }
-        await Expense.destroy({where:{id:userId}});
-        res.sendStatus(200);
+        //await Expense.destroy({where:{id:userId}});
+        //res.sendStatus(200);
+        await req.user.getExpenses({where:{id:userId}}).then(expense=>{
+            let findExpenses = expense[0];
+            findExpenses.destroy();
+            res.sendStatus(200);
+        })
 
     }
     catch(error){
