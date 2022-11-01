@@ -48,7 +48,7 @@ app.use(expenseRoutes);
 app.use(errorController.get404);
 
 
-sequelize.sync().then(result =>{
+sequelize.sync({force: true}).then(result =>{
     console.log('Server started at 5000');
     app.listen(5000); 
 }).catch(err=>{

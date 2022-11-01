@@ -10,7 +10,7 @@ const Expense = sequelize.define('expense',{
         primaryKey: true
 
     },
-    eamout:{
+    eamount:{
         type: Sequelize.INTEGER,
         allowNull:false
     },

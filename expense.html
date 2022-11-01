@@ -5,7 +5,7 @@
 <body>
     <form onsubmit="saveToStorage(event)" method="POST">
         <label >Choose Expense Amount</label>
-        <input type="text" id="ea" name="eamout" required>
+        <input type="text" id="ea" name="eamount" required>
         <label >Choose description</label>
         <input type="text" id="ed" name="edescription" required>
         <label >Choose a categoty</label>
@@ -13,7 +13,7 @@
         <datalist id="category">
             <option value="fuel"></option>
             <option value="Movie"></option>
-            <option value="trip"></option>
+            <option value="salary"></option>
             <option value="food"></option>
         </datalist>
         <button>Add Expense</button>
@@ -27,12 +27,12 @@
         function saveToStorage(event)
         {
             event.preventDefault();
-            const eamout = event.target.eamout.value;
+            const eamount = event.target.eamount.value;
             const edescription = event.target.edescription.value;
             const category = event.target.category.value;
 
             const obj = {
-                eamout,
+                eamount,
                 edescription,
                 category
             }
@@ -57,8 +57,9 @@
         function showListofRegisteredExpenses(user)
         {
             const parentNode = document.getElementById('listOfExpenses'); 
-            const createNewUserHtml = `<li id=${user.id}>${user.eamout} - ${user.edescription} -${user.category} 
+            const createNewUserHtml = `<li id=${user.id}>${user.eamount} - ${user.edescription} -${user.category} 
                                             <button onclick="deleteUser('${user.id}')">Delete</button>
+                                            <button onclick="editUser('${user.id}','${user.edescription}','${user.eamount}','${user.category}')">Edit</button>
                                            
                                          </li>
                                         `
@@ -105,22 +106,8 @@
                 })
             }
 
-/*
-            axios.delete(`https://crudcrud.com/api/e339815307da439c8403a76d86a2ee32/expenseData/${userId}`)
-            .then((response)=>{
-                removeItemFromScreen(userId)
 
-            }).catch((err)=>{
-                console.log(err);
-            })
-            
-            //localStorage.removeItem(expenseDescription);
-            //removeItemFromScreen(expenseDescription);
-            */
-/*        
-edit functionality
-         <button onclick="editUser('${user.id}','${user.edescription}','${user.eamout}','${user.category}')">Edit</button>
-        function editUser(userId,expenseDescription,expenseAmount,expenseCategory)
+            function editUser(userId,expenseDescription,expenseAmount,expenseCategory)
         {
             document.getElementById('ed').value = expenseDescription; 
             document.getElementById('ea').value = expenseAmount;
@@ -128,7 +115,7 @@ edit functionality
 
             deleteUser(userId);
 
-        }*/
+        }
 
         
 
@@ -141,6 +128,23 @@ edit functionality
             parentNode.removeChild(elem);
 
         }
+
+/*
+            axios.delete(`https://crudcrud.com/api/e339815307da439c8403a76d86a2ee32/expenseData/${userId}`)
+            .then((response)=>{
+                removeItemFromScreen(userId)
+
+            }).catch((err)=>{
+                console.log(err);
+            })
+            
+            //localStorage.removeItem(expenseDescription);
+            //removeItemFromScreen(expenseDescription);
+            */
+      
+
+         
+       
 
         
         

@@ -16,12 +16,12 @@ exports.getExpenses = async (req,res,next)=>{
 
 exports.addExpenses = async (req,res,next)=>{
     try{
-        const eamout = req.body.eamout;
+        const eamount = req.body.eamount;
         const edescription = req.body.edescription;
         const category = req.body.category;
 
         const data = await Expense.create({
-            eamout: eamout,
+            eamount: eamount,
             edescription: edescription,
             category: category,
         })
