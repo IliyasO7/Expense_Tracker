@@ -1,9 +1,11 @@
 const User = require('../models/user');
 
+const bcrypt = require('bcrypt');
 
 
 
 
+/*
 exports.signup = async(req ,res,next)=>{
 
     try {
@@ -24,8 +26,76 @@ exports.signup = async(req ,res,next)=>{
         res.status(500).json(err);
     }
 
+}*/
+
+
+
+exports.signup = async(req ,res,next)=>{
+
+  try {
+      const {username, email, password} = req.body ;
+
+      if(!username || !email || !password){
+          return res.status(400).json({message:'add all fields'})
+      }
+      const user = await User.findAll({where:{email}});
+        if(user.length>0){
+            return res.status(207).json({message:'user already exist'})
+        }
+        else{
+            bcrypt.hash(password, 10 , async (err , hash)=>{
+              console.log(err)
+              await User.create({username, email, password: hash})
+              res.status(201).json({message : 'successfully created user'})
+            })
+        }
+
+      
+
+  } catch (err) {
+      res.status(500).json(err);
+  }
+
 }
 
+
+
+
+exports.login = async(req,res)=>{
+
+  try{
+    const {email,password} = req.body;
+
+    console.log(password);
+
+    const user = await User.findAll({where:{email}})
+
+
+    bcrypt.compare()
+
+    if(user.length>0){
+      bcrypt.compare(password, user[0].password, (err, match)=> {
+        if(!match){
+           return res.status(207).json({message: 'password incorrect'})
+        }
+        return res.status(200).json({message: 'login success'})
+    })
+    }
+   else{
+    return res.status(207).json({message: 'Invalid Email '});
+   }
+  
+
+    
+  }
+  catch(error){
+    res.status(500).json(error);
+  }
+
+}
+
+
+/*
 exports.login = async(req,res)=>{
 
   try{
@@ -51,7 +121,7 @@ exports.login = async(req,res)=>{
     res.status(500).json(error);
   }
 
-}
+}*/
 
 
 

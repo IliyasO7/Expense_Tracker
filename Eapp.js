@@ -1,5 +1,7 @@
 const path = require('path');
 
+const bcrypt = require('bcrypt');
+
 
 const express = require('express'); //importing express module
 const bodyParser = require('body-parser');
