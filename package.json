@@ -8,7 +8,9 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "razorpay": "^2.8.3",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "sib-api-v3-sdk": "^8.4.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
@@ -31,5 +33,6 @@
     "url": "https://github.com/IliyasO7/Expense_Tracker/issues"
   },
   "homepage": "https://github.com/IliyasO7/Expense_Tracker#readme",
+  "keywords": [],
   "description": ""
 }

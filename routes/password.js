@@ -7,8 +7,22 @@ const express = require('express');
 
 
 const router = express.Router();
+/*
+router.use('/forgot',middlewareAuthentication.authentication,passwordController.Forgotpassword)
+// password/forgotpassword
 
-router.post('/forgotpassword',middlewareAuthentication.authentication,passwordController.Forgotpassword)
+
+router.get('/reset/:id',middlewareAuthentication.authentication,passwordController.resetPassword)
 
 
+router.post('/update/:resetpassid',middlewareAuthentication.authentication,passwordController.updatePassword)
+*/
+
+router.use('/forgot',passwordController.Forgotpassword)
+
+
+router.get('/reset/:id',passwordController.resetPassword)
+
+
+router.get('/update/:resetpassid',passwordController.updatePassword)
 module.exports = router;

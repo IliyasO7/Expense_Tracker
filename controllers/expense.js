@@ -41,6 +41,26 @@ exports.getAllUsers = async(req,res,next)=>{
     }
 }
 
+
+exports.getLeaderBoardUser = async(req,res,next)=>{
+    
+    try{
+        if(req.user.ispremiumuser){
+            const userId = req.params.loadUserId;
+            const user = await User.findOne({where:{id: userId}})
+    
+            const expenses = await user.getExpenses();
+            return res.status(200).json({success:true , data: expenses })
+        }
+
+    }
+    catch(error){
+        return res.status(500).json({success : false, data : error});
+    }
+    
+
+}
+
 /*
 exports.getAllUsers = async (req,res,next)=>{
     try{
