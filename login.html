@@ -6,22 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Login Page</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
     <body>
-        <form onsubmit="logIn(event)" method="POST">
-            
-            <label> EmailId</label>
-            <input type="email" name="emailId"  required/>
-            <label> Password</label>
-            <input type="password" name="password" required/>
-            <button id="submit"> Login </button>
-            
-        </form>
-       <a href="./signup.html">New User Signup</a>
+        <div class="center">
+            <h1>Log In</h1>
+
+            <form onsubmit="logIn(event)" method="POST">
+
+                <div class="txt_field">
+                    <input type="email" name="emailId"  required/>            
+                    <span></span>
+                    <label> EmailId</label>
+                </div>
+
+                <div class="txt_field">
+                    <input type="password" name="password" required/>
+                    <span></span>
+                    <label> Password</label>
+                      
+                </div>
+                <div class="pass" >Forgot Password?</div>
+                
+                <button class="newlogin" id="submit"> Login </button>
+
+                <div class="login_link">
+                    New member? <a href="./signup.html">Signup</a>
+                  </div>
+                
+            </form>
+
+            <div id="existing"></div>
         
-        <div id="existing"></div>
+            <ul id='listOfUsers'></ul>
+           
+
+
+
+        </div>
         
-        <ul id='listOfUsers'></ul>
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" ></script>
         <!--request the server for the code for network calls-->
 

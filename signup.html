@@ -6,23 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Signup Page</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
     <body>
-        <form onsubmit="signUp(event)" method="POST">
-            <label> Name</label>
-            <input type="text" name="username"  required/>
-            <label> EmailId</label>
-            <input type="email" name="emailId"  required/>
-            <label> Password</label>
-            <input type="password" name="password"/>
-            <button id="submit"> signup </button>
+        <div class="center">
+            <h1>Sign Up</h1>
+            <form onsubmit="signUp(event)" method="POST" id="signup-form">
+                <div class="txt_field">
+                    
+                    <input type="text" name="username"  required/>
+                    <span></span>
+                    <label> Name</label>
+                </div>
+
+                <div class="txt_field">
+                    
+                    <input type="email" name="emailId"  required/>
+                    <span></span>
+                    <label> EmailId</label>
+                </div>
+                    
+                <div class="txt_field">
+                    <input type="password" name="password"/>
+                    <span></span>
+                   
+                    <label> Password</label>
+                </div>
+               
+                <button id="submit"> signup </button>
+
+                <div class="login_link">
+                    Already a member? <a href="./login.html">Exisitng User Login</a>
+
+                </div>
+                
+            </form>
+           
             
-        </form>
-       <a href="./login.html">Exisitng User Login</a>
+            <div id="existing"></div>
+            
+            <ul id='listOfUsers'></ul>
+
+
+        </div>
         
-        <div id="existing"></div>
-        
-        <ul id='listOfUsers'></ul>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" ></script>
         <!--request the server for the code for network calls-->
 
@@ -50,7 +77,7 @@
                     console.log(response);
                     if(response.status === 201)
                     {
-                        //window.location.href = "../Login/login.html"
+                        window.location.href = "./expense.html"
                         console.log('sign up complete');
                     }
                     else if(response.status === 207)

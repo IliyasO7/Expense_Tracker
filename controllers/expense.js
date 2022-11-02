@@ -1,7 +1,90 @@
 const Expense = require('../models/expense');
 
+const User = require('../models/user')
+
+
+exports.getAllUsers = async(req,res,next)=>{
+    try {
+
+        if(req.user.ispremiumuser){
+            console.log("into getall Users");
+            let leaderboard = [];
+            let users = await User.findAll({attributes: ['id', 'username', 'email']})
+
+            console.log(users);
+
+            for(let i = 0 ;i<users.length ; i++){
+                let expenses = await  users[i].getExpenses() ;
+
+                console.log(users[i]);
+                console.log(expenses);
+                let totalExpense = 0;
+                for(let j = 0 ;j<expenses.length ; j++){
+                    totalExpense += expenses[j].eamount
+
+                }
+                console.log(totalExpense);
+                let userObj = {
+                    user:users[i],
+                    expenses,
+                    totalExpense
+                }
+                leaderboard.push(userObj);
+            }
+           return res.status(200).json({success : true, data : leaderboard});
+        }
+
+        return res.status(400).json({message : 'user is not premium user' });
+
+    } catch (error) {
+        res.status(500).json({success : false, data : error});
+    }
+}
+
+/*
+exports.getAllUsers = async (req,res,next)=>{
+    try{
+        if(req.user.ispremiumuser){
+            let leaderboard = [];
+            const users = await User.findAll({
+                attributes:['id','username','email']
+            })
+    
+            
+    
+            for(let i=0;i<users.length;i++){
+                let allUserExpenses = await users[i].getExpenses();
+                let totalExpense = 0;
+    
+                for(let j=0;i<allUserExpenses.length;j++){
+                    totalExpense += allUserExpenses[j].eamount;
+                }
+    
+                let userObj = {
+                    user: users[i],
+                    allUserExpenses,
+                    totalExpense
+                }
+    
+                leaderboard.push(userObj);
+                
+            }
+            return res.status(200).json({success : true, data : leaderboard});
+        }
+        return res.status(400).json({message : 'user is not premium user' });
+
+    }
+    catch(error){
+        res.status(500).json({success : false, data : error});
+    }
+
+
+    
+
+}*/
+
 exports.getExpenses = async (req,res,next)=>{
-    const {eamount,edescription,category}= req.body;
+   // const {eamount,edescription,category}= req.body;
    try
    {
         let data = await  req.user.getExpenses()

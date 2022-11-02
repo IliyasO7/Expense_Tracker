@@ -6,9 +6,9 @@ const User = require('../models/user');
 const authentication = (req,res,next)=>{
     try{
         const token = req.header('Authorization');
-        console.log(token);
-        const user = jwt.verify(token, process.env.TOKEN_SECRET)
-        console.log(user.userId);
+        //console.log(token);
+        const user = jwt.verify(token, 'whereistoken')
+        //console.log(user.userId);
 
         User.findByPk(user.userId).then(user=>{  //return u id of the row in table id=1 like that
             console.log(JSON.stringify(user));

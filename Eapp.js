@@ -44,14 +44,12 @@ app.use(express.json())//instead of body parson json
 
 app.use('/user',userRoutes);
 
-//app.use(expenseRoutes);
 
-//app.use('/p', purchaseRoutes);
-
-//app.use()
 
 app.use('/purchase',purchaseRoutes)
 
+
+app.use('/expense',expenseRoutes)
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -65,7 +63,7 @@ Order.belongsTo(User);
 
 
 
-sequelize.sync({force:true}).then(result =>{
+sequelize.sync().then(result =>{
     console.log('Server started at 5000');
     app.listen(5000); 
 }).catch(err=>{
