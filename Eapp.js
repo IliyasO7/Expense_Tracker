@@ -16,6 +16,7 @@ const sequelize = require('./util/database'); //pool that allows use to use conn
 const User = require('./models/user');
 const Expense = require('./models/expense');
 const Order = require('./models/orders');
+const Forgotpassword = require('./models/forgotPassword');
 
 const cors = require('cors');
 
@@ -30,7 +31,7 @@ const userRoutes = require('./routes/users');
 const expenseRoutes = require('./routes/expense');
 
 const purchaseRoutes = require('./routes/purchaseRoutes');
-
+const forgotRoutes =  require('./routes/password');
 
 
 app.use(express.json())//instead of body parson json
@@ -51,11 +52,16 @@ app.use('/purchase',purchaseRoutes)
 
 app.use('/expense',expenseRoutes)
 
+
+app.use('/password', forgotRoutes)
 User.hasMany(Expense);
 Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(Forgotpassword);
+Forgotpassword.belongsTo(User);
 
 
 //app.use(errorController.get404);

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forgot Password</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="center">
+        <h1>Forgot Password</h1>
+
+        <form onsubmit="forgotPass(event)" method="POST">
+
+            <div class="txt_field">
+                <input type="email" name="emailId"  required/>            
+                <span></span>
+                <label> EmailId</label>
+            </div>
+
+            <button class="newlogin" id="submit"> send </button>
+
+            
+            
+        </form>
+
+        <div id="existing"></div>
+    
+        <ul id='listOfUsers'></ul>
+       
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" ></script>
+    <script>
+
+        function forgotPass(event){
+            event.preventDefault();
+            const email = event.target.emailId.value;
+
+            const obj = {
+                email
+            }
+            console.log('1255');
+
+            axios.post("http://localhost:5000/password/forgotpassword", obj).the((response)=>{
+                console.log(response);
+            }).catch(err=>console.log(err))
+
+        }
+
+
+
+
+    </script>
+</body>
+</html>
