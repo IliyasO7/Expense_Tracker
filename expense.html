@@ -10,10 +10,12 @@
 <body class="light">
     <div id="nav">
         <button onclick="payment(event)" id="premium">Buy Premium</button>
-        <button onclick="reportGenerete(event)" id="report" style="display:none;"></button>
+        <button onclick="reportGenerete(event)" class="rep" id="report" style="color: red; align-self: center;">Report</button>
         
         
       </div>
+      
+      
 
       <section class="row">
         <div class="light" id="left">
@@ -54,12 +56,14 @@
         </div>
 
         <div id="right" class="dark">
+            
             <div style="text-align: center"><h1>LeaderBoard</h1></div>
             <li class="leaderboard" >
               <h4></h4>
               <h4>Names</h4>
               <h4>Expense (₹)</h4>
             </li>
+            
         </div>
 
       </section>
@@ -151,9 +155,16 @@
 
                 if(userType == "true"){
                     premiumUser();
+                    reportDown();
                     getPremiumLeaderboard();
 
                 }
+            }
+
+
+            function reportDown(){
+                const down = document.getElementById('report');
+                down.innerHTML = 'report';
             }
             
                 
@@ -256,10 +267,11 @@
         function premiumUser(){
 
             const premium = document.getElementById('premium');
-            const reportG = document.getElementById('report');
+           
 
             premium.innerHTML = 'Its Premium Account'
-            reportG.innerHTML = 'Reports'
+            
+            
             
 
             document.body.classList.remove('light');
@@ -270,6 +282,9 @@
             document.getElementById('left').classList.add('dark');
             document.getElementsByTagName('input')[0].classList.add('dark');
             document.getElementById('right').style = 'display:block'
+
+
+            
             
 
 

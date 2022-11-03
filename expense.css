@@ -113,10 +113,17 @@ body.dark{
 
   }
 
+  .rep{
+    margin:15px 5px; ;
+    padding: 5px;
+    width : 15% ;
+    
+  }
+
   #right.dark{
     margin:   15px 0px;
     float: left;
-    width : 26% ;
+    width : 15% ;
     background: #474747;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);

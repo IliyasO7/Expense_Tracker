@@ -17,6 +17,8 @@ const User = require('./models/user');
 const Expense = require('./models/expense');
 const Order = require('./models/orders');
 const Forgotpassword = require('./models/forgotPassword');
+const DownloadUrl = require('./models/downloadUrls');
+
 
 const cors = require('cors');
 
@@ -64,6 +66,9 @@ Order.belongsTo(User);
 
 User.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(User);
+
+User.hasMany(DownloadUrl);
+DownloadUrl.belongsTo(User);
 
 
 //app.use(errorController.get404);

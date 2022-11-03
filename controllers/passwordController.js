@@ -103,6 +103,7 @@ exports.Forgotpassword = async(req,res,next)=>{
 }
 
 exports.resetPassword = async (req,res,next)=>{
+    console.log('into reset');
     let  id = req.params.id ;
 
     try {
@@ -111,7 +112,7 @@ exports.resetPassword = async (req,res,next)=>{
             return res.status(404).json('User doesnt exist')
         }
         forgotpasswordrequest.update({ active:false });
-      /*  res.status(200).send(`<html>
+        /*res.status(200).send(`<html>
                                     <script>
                                         function update(event){
                                             event.preventDefault();
@@ -160,6 +161,7 @@ exports.resetPassword = async (req,res,next)=>{
 
 
 exports.updatePassword = async(req,res,next)=>{
+    console.log('into update');
     const { newpassword } = req.query;
     const id = req.params.resetpasswordid;
 

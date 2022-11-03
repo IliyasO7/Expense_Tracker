@@ -12,5 +12,8 @@ router.get('/premiums',middlewareAuthentication.authentication, expenseControlle
 
 router.get('/getInfo/:loadUserId', middlewareAuthentication.authentication, expenseController.getLeaderBoardUser)
 
+router.get('/download', middlewareAuthentication.authentication, expenseController.downloadExpense)
+
+router.get('/getAllUrl', middlewareAuthentication.authentication, expenseController.downloadAllUrl)
 
 module.exports = router;
