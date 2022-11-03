@@ -57,6 +57,11 @@
 
             <div style="text-align: center ; margin-top: 35px;"><h1>Expenses</h1></div>
             <div style="text-align: center ; margin-top: 35px;">
+                <form onsubmit="perPage(event)" id="perpage">
+                    Expenses Per Page : <input type="number" min="5" max="20"  name="Items_Per_Page" >
+                    <button  type="submit">submit</button>
+                  </form>
+                </div>
               
             <div id="expense-div" class="light">
               
@@ -146,18 +151,25 @@
 
 
         window.addEventListener('DOMContentLoaded', async(event) =>{
+           // event.preventDefault();
+
+           let Items_Per_Page = +document.getElementById('Items_Per_Page')
+
+          // Items_Per_Page = +event.target.Items_Per_Page.value;    ${page}
             const token = localStorage.getItem('token');
 
             let page = 1;
 
 
-            let response = await axios.get(`http://localhost:5000/user/getExpenses/${page}`, {headers: {"Authorization": token}})
+            let response = await axios.post(`http://localhost:5000/user/getExpenses/${page}`,{Items_Per_Page: Items_Per_Page}, {headers: {"Authorization": token}})
 
             checkIfPremiumUser();
 
             if(response.status === 200 ){
                // console.log(response.data);
                 //console.log(response.data.data[0]);
+                console.log('?????????????');
+                console.log(response.data);
                 const listOfUsers = document.getElementById('listOfExpenses')
 
                 console.log(response.data.info);
@@ -300,6 +312,7 @@
         }
 
         function showPagination({currentPage,hasNextPage,hasPreviousPage,nextPage,previousPage,lastPage}){
+            let page =1;
             const pagination= document.getElementById('pagination')
             
 
@@ -308,27 +321,27 @@
             if(hasPreviousPage){
                 const button1 = document.createElement('button');
                 button1.innerHTML = previousPage ;
-                button1.addEventListener('click' , ()=>getPageExpenses(previousPage))
+                button1.addEventListener('click' , ()=>getPageExpenses(page,previousPage))
                 pagination.appendChild(button1)
             }
 
             const button2 = document.createElement('button');
             button2.classList.add('active')
             button2.innerHTML = currentPage ;
-            button2.addEventListener('click' , ()=>getPageExpenses(currentPage))
+            button2.addEventListener('click' , ()=>getPageExpenses(page,currentPage))
             pagination.appendChild(button2)
 
             if(hasNextPage){
                 const button3 = document.createElement('button');
                 button3.innerHTML = nextPage ;
-                button3.addEventListener('click' , ()=>getPageExpenses(nextPage))
+                button3.addEventListener('click' , ()=>getPageExpenses(page,nextPage))
                 pagination.appendChild(button3)
             }
 
             if( currentPage!=lastPage && nextPage!=lastPage){
                 const button3 = document.createElement('button');
                 button3.innerHTML = lastPage ;
-                button3.addEventListener('click' , ()=>getPageExpenses(lastPage))
+                button3.addEventListener('click' , ()=>getPageExpenses(page,lastPage))
                 pagination.appendChild(button3)
             }
 
@@ -337,17 +350,26 @@
 
         }
 
-        async function getPageExpenses(page){
+        async function getPageExpenses(page , limitper){
             const listOfUsers = document.getElementById('listOfExpenses')
+         //   let Items_Per_Page = +document.getElementById('Items_Per_Page').value
+         let Items_Per_Page = limitper                                 /*localStorage.getItem('itemsperpage')*/
+
+
+            console.log('//////////////////');
+            console.log(Items_Per_Page);
+
             
             
             const token = localStorage.getItem('token');
-            let response = await axios.get(`http://localhost:5000/user/getExpenses/${page}`, {headers: {"Authorization": token}})
+            let response = await axios.post(`http://localhost:5000/user/getExpenses/${page}`,{Items_Per_Page:Items_Per_Page} ,{headers: {"Authorization": token}})
 
             if(response.status === 200 ){
                // console.log(response.data);
                 //console.log(response.data.data[0]);
-                console.log(response.data.info);
+                console.log(response);
+                console.log('{{{{{{{{{{{{{{{{{{{{{{{{[');
+                //console.log(response.data.info);
                 listOfUsers.innerHTML = '';
               
                 for(let i=0;i<response.data.data.length;i++)
@@ -438,6 +460,20 @@
             </li>`
 
             leaderboardDiv.innerHTML += child
+        }
+
+        function perPage(event){
+            let Items_Per_Page = +document.getElementById('Items_Per_Page')
+            let page = 1;
+            event.preventDefault();
+            console.log('*****************');
+            console.log(Items_Per_Page);
+            //console.log(typeof(+event.target.Items_Per_Page.value));
+            //Items_Per_Page = +event.target.Items_Per_Page.value
+            localStorage.setItem('itemsperpage' , +event.target.Items_Per_Page.value )
+            Items_Per_Page = localStorage.getItem('itemsperpage')
+            getPageExpenses(page, +event.target.Items_Per_Page.value);
+            //event.target.Items_Per_Page.value
         }
 
         function openUserExpenses(user){

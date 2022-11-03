@@ -152,9 +152,14 @@ exports.getAllUsers = async (req,res,next)=>{
 }*/
 
 exports.getExpenses = async (req,res,next)=>{
-   // const {eamount,edescription,category}= req.body;
-    let page = req.params.pageNo || 1;
-    let Items_Per_Page = 5;
+   // const {eamount,edescription,category}= req.body;         
+    let page = req.params.pageNo ||  1;
+    console.log(page);
+    console.log('---------------------------');
+    let Items_Per_Page = +(req.body.Items_Per_Page)|| 5;
+   
+    console.log('************************************');
+    console.log(Items_Per_Page);
     let totalItems;
 
 
@@ -166,6 +171,7 @@ exports.getExpenses = async (req,res,next)=>{
         totalItems = count;
 
         let data = await req.user.getExpenses({offset: (page-1)*Items_Per_Page, limit: Items_Per_Page})
+        ///console.log(data);
         res.status(200).json({
             data,
             info: {

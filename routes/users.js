@@ -26,11 +26,12 @@ router.delete('/user/deleteUser/:userId',authenticateMiddleware.authentication,u
 */
 
 
-router.get('/getExpenses/:pageNo',userAuthentication.authentication ,expenseController.getExpenses);
+router.post('/getExpenses/:pageNo',userAuthentication.authentication ,expenseController.getExpenses);
 
 router.post('/addExpense',userAuthentication.authentication,expenseController.addExpenses);
 
 router.delete('/deleteExpense/:userId',userAuthentication.authentication,expenseController.deleteExpenses);
+
 
 
 module.exports = router;
