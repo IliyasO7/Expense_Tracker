@@ -153,12 +153,30 @@ exports.getAllUsers = async (req,res,next)=>{
 
 exports.getExpenses = async (req,res,next)=>{
    // const {eamount,edescription,category}= req.body;
+    let page = req.params.pageNo || 1;
+    let Items_Per_Page = 5;
+    let totalItems;
+
+
    try
    {
-        let data = await  req.user.getExpenses()
-        res.status(200).json({data});
+      //  let data = await  req.user.getExpenses()
+      //  res.status(200).json({data});
+        let count = await Expense.count({where:{userId: req.user.id}})
+        totalItems = count;
 
-        
+        let data = await req.user.getExpenses({offset: (page-1)*Items_Per_Page, limit: Items_Per_Page})
+        res.status(200).json({
+            data,
+            info: {
+            currentPage: page,
+              hasNextPage: totalItems > page * Items_Per_Page,
+              hasPreviousPage: page > 1,
+              nextPage: +page + 1,
+              previousPage: +page - 1,
+              lastPage: Math.ceil(totalItems / Items_Per_Page),
+            }
+        })
         
    }
    catch(error){
