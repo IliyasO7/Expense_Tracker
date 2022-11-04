@@ -67,6 +67,10 @@ app.use('/expense',expenseRoutes)
 
 app.use('/pass', forgotRoutes)
 
+app.use((req,res)=>{
+    res.sendFile(path.join( __dirname, `public/${req.url}`))
+})
+
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
