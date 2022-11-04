@@ -6,7 +6,6 @@ const getExpenses = (req, where)=>{
 }
 
 
-
 module.exports = {
     getExpenses
 }

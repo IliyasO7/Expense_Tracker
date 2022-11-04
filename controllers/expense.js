@@ -13,9 +13,8 @@ const S3services = require('../service/s3services');
 
 
 exports.downloadExpense =  async(req,res,next)=>{
-
     try{
-        
+
 
         const expenses = await Userservices.getExpenses(req)   //s3 funcationality 
 //req.user.getExpenses();

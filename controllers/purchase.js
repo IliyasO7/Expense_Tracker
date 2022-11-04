@@ -27,7 +27,6 @@ const purchasepremium =async (req, res) => {
     }
 }
 
-
  const updateTransactionStatus = (req, res ) => {
     try {
         const { payment_id, order_id} = req.body;
