@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "aws-sdk": "^2.1246.0",
+    "aws-sdk": "^2.1247.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "compression": "^1.7.4",
@@ -15,14 +15,11 @@
     "sequelize": "^6.25.3",
     "sib-api-v3-sdk": "^8.4.2",
     "uuid": "^9.0.0"
-
-
-    
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
-  "name": "expenses",
+  "name": "eptracker",
   "version": "1.0.0",
   "main": "Eapp.js",
   "scripts": {
@@ -32,14 +29,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IliyasO7/Expense_Tracker.git"
+    "url": "git+https://github.com/IliyasO7/Expense_AWS.git"
   },
   "author": "iliyas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IliyasO7/Expense_Tracker/issues"
+    "url": "https://github.com/IliyasO7/Expense_AWS/issues"
   },
-  "homepage": "https://github.com/IliyasO7/Expense_Tracker#readme",
-  "keywords": [],
+  "homepage": "https://github.com/IliyasO7/Expense_AWS#readme",
   "description": ""
 }

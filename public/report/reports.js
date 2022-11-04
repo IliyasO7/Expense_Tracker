@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', async(event)=>{
     try{
 
         
-        let response = await axios.get('http://18.183.210.71:5000/expense/getAllUrl', {headers:{'Authorization': token}})
+        let response = await axios.get('http://localhost:5000/expense/getAllUrl', {headers:{'Authorization': token}})
 
         if(response.status === 200){
             //some code
@@ -69,7 +69,7 @@ download.addEventListener('click', async(event)=>{
         }
 
 */
-        let response =  await axios.get('http://18.183.210.71:5000/expense/download', { headers: {"Authorization" : token} })
+        let response =  await axios.get('http://localhost:5000/expense/download', { headers: {"Authorization" : token} })
         
         if(response.status === 200){
             //the bcakend is essentially sending a download link
