@@ -31,7 +31,6 @@ exports.signup = async(req ,res,next)=>{
 }*/
 
 
-
 exports.signup = async(req ,res,next)=>{
 
   try {
