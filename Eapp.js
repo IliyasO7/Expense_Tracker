@@ -65,6 +65,7 @@ app.use('/purchase',purchaseRoutes)
 app.use('/expense',expenseRoutes)
 
 
+
 app.use('/pass', forgotRoutes)
 
 app.use((req,res)=>{
