@@ -1,4 +1,5 @@
-const token = localStorage.getItem('token');
+/*const token = localStorage.getItem('token');
+
 
 document.getElementById('rzp-button1').onclick = async function (e) {
     const response  = await axios.get('http://localhost:5000/purchase/premiummembership', { headers: {"Authorization" : token} });
@@ -42,4 +43,4 @@ document.getElementById('rzp-button1').onclick = async function (e) {
   alert(response.error.metadata.order_id);
   alert(response.error.metadata.payment_id);
  });
-}
+}*/

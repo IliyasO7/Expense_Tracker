@@ -25,3 +25,4 @@
 ::1 - - [04/Nov/2022:18:55:35 +0000] "POST /user/getExpenses/1 HTTP/1.1" 200 125 "http://127.0.0.1:5500/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36"
 ::1 - - [04/Nov/2022:18:55:35 +0000] "OPTIONS /expense/premiums HTTP/1.1" 204 0 "http://127.0.0.1:5500/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36"
 ::1 - - [04/Nov/2022:18:55:35 +0000] "GET /expense/premiums HTTP/1.1" 400 38 "http://127.0.0.1:5500/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36"
+

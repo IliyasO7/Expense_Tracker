@@ -8,6 +8,8 @@ const userAuthentication = require('../middleware/auth');
 
 const router = express.Router();
 
+
+
 router.get('/premiums',middlewareAuthentication.authentication, expenseController.getAllUsers)
 
 router.get('/getInfo/:loadUserId', middlewareAuthentication.authentication, expenseController.getLeaderBoardUser)
