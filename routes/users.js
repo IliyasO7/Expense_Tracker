@@ -26,6 +26,8 @@ router.delete('/user/deleteUser/:userId',authenticateMiddleware.authentication,u
 */
 
 
+
+
 router.post('/getExpenses/:pageNo',userAuthentication.authentication ,expenseController.getExpenses);
 
 router.post('/addExpense',userAuthentication.authentication,expenseController.addExpenses);

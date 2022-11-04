@@ -20,6 +20,9 @@ router.post('/update/:resetpassid',middlewareAuthentication.authentication,passw
 
 
 
+
+
+
 router.get('/reset/:id',passwordController.resetPassword)
 
 
