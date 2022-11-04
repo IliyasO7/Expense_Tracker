@@ -1,5 +1,5 @@
 const path = require('path');
-
+const fs =require('fs');
 const bcrypt = require('bcrypt');
 
 const dotenv = require('dotenv')
@@ -21,10 +21,19 @@ const DownloadUrl = require('./models/downloadUrls');
 
 
 const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');  //morgan is a Node. js and Express middleware to log HTTP requests and errors, and simplifies the process
+const accessLogStream = fs.createWriteStream('access.log', {flag: 'a'})
+
 
 const app = express();  // using func of express to handling things for us or showing a way 
 dotenv.config();
 
+
+app.use(helmet());
+app.use(compression());
+app.use(morgan('combined', {stream: accessLogStream}));
 app.use(cors());
 
 
@@ -78,7 +87,7 @@ DownloadUrl.belongsTo(User);
 
 sequelize.sync().then(result =>{
     console.log('Server started at 5000');
-    app.listen(5000); 
+    app.listen(process.env.PORT || 5000); 
 }).catch(err=>{
     console.log(err);
 });                                                            
